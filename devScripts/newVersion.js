@@ -6,5 +6,5 @@ manifest.version = process.env.npm_package_version;
 
 fs.writeFileSync(
   path.join(__dirname, "../public/manifest.json"),
-  JSON.stringify(manifest, null, 2)
+  JSON.stringify(manifest, null, 2),
 );

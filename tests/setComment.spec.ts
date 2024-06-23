@@ -38,7 +38,7 @@ test("two decorations can be added", async ({ page, mainPage }) => {
   await page.keyboard.press("Enter");
 
   await expect(mainPage.textareaLocator).toHaveValue(
-    "**praise (if-minor, non-blocking):** "
+    "**praise (if-minor, non-blocking):** ",
   );
 });
 
@@ -80,7 +80,7 @@ test("one decoration can be cleared", async ({ page, mainPage }) => {
     .click();
 
   await expect(mainPage.textareaLocator).toHaveValue(
-    "**praise (non-blocking):** "
+    "**praise (non-blocking):** ",
   );
 });
 

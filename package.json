@@ -7,11 +7,31 @@
     "node": "20.14.0"
   },
   "scripts": {
-    "version": "node scripts/newVersion.js && git add public/manifest.json",
+    "dev": "extension dev",
+    "start": "extension start",
+    "build": "extension build -b all",
+    "version": "node devScripts/newVersion.js && git add public/manifest.json",
     "postversion": "git push origin main && git push origin refs/tags/v$npm_package_version",
-    "2fa-code": "node scripts/getTwoFactorAuthenticationCode.mjs",
-    "update-screenshots": "node scripts/getScreenshotsFromCI.mjs"
+    "2fa-code": "node devScripts/getTwoFactorAuthenticationCode.mjs",
+    "update-screenshots": "node devScripts/getScreenshotsFromCI.mjs"
   },
-  "devDependencies": {},
-  "dependencies": {}
+  "dependencies": {
+    "react": "18.3.1",
+    "react-dom": "18.3.1"
+  },
+  "devDependencies": {
+    "@eslint/compat": "1.1.0",
+    "@eslint/js": "9.5.0",
+    "@types/react": "18.3.3",
+    "@types/react-dom": "18.3.0",
+    "eslint": "8.57.0",
+    "eslint-config-prettier": "9.1.0",
+    "eslint-plugin-react": "7.34.3",
+    "extension": "1.7.1",
+    "globals": "15.6.0",
+    "prettier": "3.3.2",
+    "tailwindcss": "3.4.4",
+    "typescript": "5.4.5",
+    "typescript-eslint": "7.13.1"
+  }
 }

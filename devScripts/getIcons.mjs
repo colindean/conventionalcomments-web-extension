@@ -6,7 +6,7 @@ import path from "node:path";
 import { pipeline } from "node:stream/promises";
 
 const BASE_URL = `https://api.figma.com/v1/files/${config.get(
-  "figma.fileKey"
+  "figma.fileKey",
 )}`;
 
 const versionsRequest = await fetch(`${BASE_URL}/versions`, {
@@ -16,13 +16,13 @@ const versionsRequest = await fetch(`${BASE_URL}/versions`, {
 });
 if (!versionsRequest.ok) {
   throw new Error(
-    `Getting the version returned ${versionsRequest.status} (${versionsRequest.statusText})`
+    `Getting the version returned ${versionsRequest.status} (${versionsRequest.statusText})`,
   );
 }
 
 const { versions } = await versionsRequest.json();
 const version = versions.find(
-  ({ label }) => label === config.get("figma.version")
+  ({ label }) => label === config.get("figma.version"),
 );
 if (version === undefined) {
   throw new Error(`Version '${config.get("figma.version")}' not found`);
@@ -38,23 +38,23 @@ const fileRequest = await fetch(fileRequestUrl, {
 });
 if (!fileRequest.ok) {
   throw new Error(
-    `Getting the version returned ${fileRequest.status} (${fileRequest.statusText})`
+    `Getting the version returned ${fileRequest.status} (${fileRequest.statusText})`,
   );
 }
 const file = await fileRequest.json();
 const icons = file.document.children[0].children.filter(
-  ({ name }) => !name.startsWith("_")
+  ({ name }) => !name.startsWith("_"),
 );
 
 const iconsFolder = path.join(
   path.dirname(fileURLToPath(import.meta.url)),
-  "../public/icons"
+  "../public/icons",
 );
 await fs.promises.rm(iconsFolder, { recursive: true });
 await fs.promises.mkdir(iconsFolder);
 
 const fileUrl = new URL(
-  `https://api.figma.com/v1/images/${config.get("figma.fileKey")}`
+  `https://api.figma.com/v1/images/${config.get("figma.fileKey")}`,
 );
 fileUrl.searchParams.append("ids", icons.map(({ id }) => id).join(","));
 fileUrl.searchParams.append("scale", 1);
@@ -68,7 +68,7 @@ const imageRequest = await fetch(fileUrl, {
 });
 if (!imageRequest.ok) {
   throw new Error(
-    `Getting the image returned ${imageRequest.status} (${imageRequest.statusText})`
+    `Getting the image returned ${imageRequest.status} (${imageRequest.statusText})`,
   );
 }
 const { err, images } = await imageRequest.json();
@@ -80,12 +80,12 @@ await Promise.all(
     const imageContentRequest = await fetch(images[icon.id]);
     if (!imageContentRequest.ok) {
       throw new Error(
-        `Getting the content  image returned ${imageContentRequest.status} (${imageContentRequest.statusText})`
+        `Getting the content  image returned ${imageContentRequest.status} (${imageContentRequest.statusText})`,
       );
     }
     await pipeline(
       imageContentRequest.body,
-      fs.createWriteStream(path.join(iconsFolder, `${icon.name}.png`))
+      fs.createWriteStream(path.join(iconsFolder, `${icon.name}.png`)),
     );
-  })
+  }),
 );

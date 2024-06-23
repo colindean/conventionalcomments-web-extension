@@ -16,7 +16,7 @@ const basePayload = {
 };
 try {
   outDir = await fs.mkdtemp(
-    path.join(os.tmpdir(), "conventionalcomments-web-extension-")
+    path.join(os.tmpdir(), "conventionalcomments-web-extension-"),
   );
   const client = new Octokit({ auth: config.get("e2e.github.token") });
   const workflowRuns = await client.rest.actions
@@ -81,12 +81,12 @@ try {
                 `${fileNameParts
                   .at(-1)
                   .replace("-actual.png", "")}-${fileNameParts.at(
-                  -3
+                  -3,
                 )}-linux.png`,
-              ]
+              ],
             );
             const stream = await promisify(
-              zipfile.openReadStream.bind(zipfile)
+              zipfile.openReadStream.bind(zipfile),
             )(entry);
             await pipeline(stream, createWriteStream(destFilename));
             zipfile.readEntry();
@@ -100,7 +100,7 @@ try {
           zipfile.readEntry();
         });
       });
-    })
+    }),
   );
 } catch (error) {
   process.exitCode = 1;

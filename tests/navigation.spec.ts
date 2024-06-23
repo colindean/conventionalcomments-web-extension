@@ -35,7 +35,7 @@ test("Plugin is not loaded on the overview page (edit description)", async ({
   await mainPage.goToOverviewPage();
   await mainPage.editCommentFromMainPage(
     pullRequestCommentIds[0],
-    "pullRequestDescription"
+    "pullRequestDescription",
   );
   await expect(page.getByTestId("toggle-button")).not.toBeVisible();
 });
@@ -61,7 +61,7 @@ test("Plugin is not loaded on the issue page (edit description)", async ({
   await mainPage.goToIssuePage();
   await mainPage.editCommentFromMainPage(
     issueCommentIds[0],
-    "issueDescription"
+    "issueDescription",
   );
   await expect(page.getByTestId("toggle-button")).not.toBeVisible();
 });

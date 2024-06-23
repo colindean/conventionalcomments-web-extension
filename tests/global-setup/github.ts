@@ -48,7 +48,7 @@ const globalSetup = async () => {
     repo: config.get<string>("e2e.github.project"),
     path: "README.md",
     content: Buffer.from("# New title\n\nMy first line updated.\n").toString(
-      "base64"
+      "base64",
     ),
     branch: "new_branch",
     message: "Update doc",
@@ -79,7 +79,7 @@ const globalSetup = async () => {
     repo: config.get<string>("e2e.github.project"),
     path: "README.md",
     content: Buffer.from("# New title\n\nMy first line updated 2.\n").toString(
-      "base64"
+      "base64",
     ),
     branch: "new_branch2",
     message: "Update doc",
