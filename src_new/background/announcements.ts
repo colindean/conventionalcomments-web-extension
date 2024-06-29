@@ -5,23 +5,28 @@ async function getAnnouncements(): Promise<Record<string, boolean>> {
   return announcements;
 }
 
-async function addAnnouncement(announcement: string): Promise<void> {
+async function addAnnouncement(
+  announcementKey: string,
+  isActive: boolean,
+): Promise<void> {
   const announcements = await getAnnouncements();
-  if (announcement in announcements) {
+
+  if (announcements[announcementKey] !== undefined) {
     return;
   }
   await chrome.storage.local.set({
-    [KEY]: { ...announcements, [announcement]: true },
+    [KEY]: { ...announcements, [announcementKey]: isActive },
   });
 }
 
-async function removeAnnouncement(announcement: string): Promise<void> {
+// TODO: rename those functions? e.g. markAnnoucementAsRead
+async function removeAnnouncement(announcementKey: string): Promise<void> {
   const announcements = await getAnnouncements();
-  if (!(announcement in announcements)) {
+  if (announcements[announcementKey] === undefined) {
     return;
   }
   await chrome.storage.local.set({
-    [KEY]: { ...announcements, [announcement]: false },
+    [KEY]: { ...announcements, [announcementKey]: false },
   });
 }
 

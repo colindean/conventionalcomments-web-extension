@@ -71,10 +71,10 @@ init();
 
 chrome.runtime.onInstalled.addListener(async ({ reason }) => {
   await init();
-  if (reason !== "update") {
+  if (reason !== "install" && reason !== "update") {
     return;
   }
-  await addAnnouncement("custom-domains");
+  await addAnnouncement("custom-domains", reason === "update");
   await refreshIcon();
 });
 
