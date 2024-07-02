@@ -44,7 +44,13 @@ const disposeFunctions = commentEditorExtractors.map((commentEditorExtractor) =>
       editorParams.target.appendChild(rootEl);
       const root = createRoot(rootEl);
       root.render(
-        <App editorParams={editorParams} buttonParams={buttonParams} />,
+        <App
+          productType={productType}
+          textarea={textarea}
+          isMainComment={isMainComment}
+          editorParams={editorParams}
+          buttonParams={buttonParams}
+        />,
       );
     },
     disposeNoteHolder,
