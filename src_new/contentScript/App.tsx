@@ -12,22 +12,12 @@ interface AppProps {
   productType: ProductType;
   textarea: HTMLTextAreaElement;
   isMainComment: boolean;
-  editorParams: {
-    target: Element;
-    anchor?: Element;
-  };
   buttonParams: {
     target: Element;
     anchor?: Element;
   };
 }
-function App({
-  productType,
-  textarea,
-  isMainComment,
-  editorParams,
-  buttonParams,
-}: AppProps) {
+function App({ productType, textarea, isMainComment, buttonParams }: AppProps) {
   const [buttonEl, setButtonEl] = useState<Element | null>(null);
   const [{ isActive, label, decorations }, setState] = useState<{
     isActive: boolean;
@@ -101,19 +91,6 @@ function App({
     invariant(currentDecoration !== undefined, "Current decoration must exist");
     return currentDecoration.value;
   });
-
-  useEffect(() => {
-    const el = document.createElement("span");
-    if (editorParams.anchor !== undefined) {
-      editorParams.target.insertBefore(el, editorParams.anchor);
-    } else {
-      editorParams.target.appendChild(el);
-    }
-    setEditorEl(el);
-    return () => {
-      el.remove();
-    };
-  }, [editorParams.target, editorParams.anchor]);
 
   useEffect(() => {
     const el = document.createElement("span");

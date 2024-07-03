@@ -51,7 +51,6 @@ const disposeFunctions = commentEditorExtractors.map((commentEditorExtractor) =>
           productType={productType}
           textarea={textarea}
           isMainComment={isMainComment}
-          editorParams={editorParams}
           buttonParams={buttonParams}
         />,
       );
