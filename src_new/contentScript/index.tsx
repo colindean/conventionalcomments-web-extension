@@ -40,8 +40,11 @@ const disposeFunctions = commentEditorExtractors.map((commentEditorExtractor) =>
       productType,
     }) => {
       const rootEl = document.createElement("span");
-      textarea.parentElement?.insertBefore(rootEl, textarea);
-      editorParams.target.appendChild(rootEl);
+      if (editorParams.anchor !== undefined) {
+        editorParams.target.insertBefore(rootEl, editorParams.anchor);
+      } else {
+        editorParams.target.appendChild(rootEl);
+      }
       const root = createRoot(rootEl);
       root.render(
         <App

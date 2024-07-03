@@ -28,7 +28,6 @@ function App({
   editorParams,
   buttonParams,
 }: AppProps) {
-  const [editorEl, setEditorEl] = useState<Element | null>(null);
   const [buttonEl, setButtonEl] = useState<Element | null>(null);
   const [{ isActive, label, decorations }, setState] = useState<{
     isActive: boolean;
@@ -137,7 +136,7 @@ function App({
     currentDecorationValues,
   );
 
-  if (editorEl === null || buttonEl === null) {
+  if (buttonEl === null) {
     return null;
   }
 
@@ -168,17 +167,14 @@ function App({
         />,
         buttonEl,
       )}
-      {isActive
-        ? createPortal(
-            <Editor
-              label={label}
-              decorations={decorations}
-              onSelectLabel={onSelectLabel}
-              onToggleDecoration={onToggleDecoration}
-            />,
-            editorEl,
-          )
-        : null}
+      {isActive ? (
+        <Editor
+          label={label}
+          decorations={decorations}
+          onSelectLabel={onSelectLabel}
+          onToggleDecoration={onToggleDecoration}
+        />
+      ) : null}
     </>
   );
 }
