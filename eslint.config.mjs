@@ -4,6 +4,7 @@ import tseslint from "typescript-eslint";
 import pluginReactConfig from "eslint-plugin-react/configs/recommended.js";
 import eslintConfigPrettier from "eslint-config-prettier";
 import reactHooks from "eslint-plugin-react-hooks";
+import storybook from "eslint-plugin-storybook";
 
 export default [
   { files: ["**/*.{js,mjs,cjs,ts,jsx,tsx}"] },
@@ -23,5 +24,12 @@ export default [
     rules: {
       "react/react-in-jsx-scope": "off",
     },
+  },
+  {
+    files: ["*.stories.@(ts|tsx|js|jsx|mjs|cjs)"],
+    plugins: {
+      storybook: storybook,
+    },
+    rules: storybook.rules.recommended,
   },
 ];
