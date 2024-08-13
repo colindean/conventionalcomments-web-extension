@@ -33,8 +33,8 @@ function App({ productType, textarea, isMainComment, buttonParams }: AppProps) {
     return {
       isActive:
         initialComment !== null || (textarea.value === "" && isMainComment),
-      label: LABELS[0].label,
-      decorations: [],
+      label: initialComment?.label ?? LABELS[0].label,
+      decorations: initialComment?.decorations ?? [],
     };
   });
 

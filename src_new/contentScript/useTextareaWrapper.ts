@@ -14,23 +14,18 @@ function useTextareaWrapper(
 ) {
   const prependedText = useRef(formatComment(label, decorations));
   useEffect(() => {
+    const previousPrependedTextLength = prependedText.current.length;
     prependedText.current = formatComment(label, decorations);
     if (isActive) {
-      const currentComment = extractComment(
-        textarea.value,
-        LABELS.map(({ value }) => value),
-        DECORATIONS.map(({ value }) => value),
-      );
-
-      const previousCommentLength = currentComment?.totalLength ?? 0;
       const selectionShift =
-        prependedText.current.length - previousCommentLength;
+        prependedText.current.length - previousPrependedTextLength;
       const newSelectionStart = textarea.selectionStart + selectionShift;
       const newSelectionEnd = textarea.selectionEnd + selectionShift;
       const newSelectionDirection = textarea.selectionDirection;
 
       textarea.value =
-        prependedText.current + textarea.value.substring(previousCommentLength);
+        prependedText.current +
+        textarea.value.substring(previousPrependedTextLength);
       textarea.dispatchEvent(new Event("change"));
       textarea.setSelectionRange(
         newSelectionStart,
@@ -38,9 +33,7 @@ function useTextareaWrapper(
         newSelectionDirection,
       );
     }
-    setTimeout(() => {
-      textarea.focus();
-    }, 0);
+    textarea.focus();
   }, [textarea, isActive, label, decorations]);
 
   useEffect(() => {

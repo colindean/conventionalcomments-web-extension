@@ -12,7 +12,7 @@ export default [
     },
   },
   {
-    ignores: ["dist/**"],
+    ignores: ["dist/**", "**/*.d.ts"],
   },
   ...tseslint.config(
     {

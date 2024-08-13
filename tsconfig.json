@@ -12,8 +12,11 @@
     "resolveJsonModule": true,
     "strict": true,
     "noImplicitAny": true,
-    "target": "esnext"
+    "target": "esnext",
+    "paths": {
+      "@/*": ["./*"]
+    }
   },
-  "include": ["./src_new"],
+  "include": ["./src_new", "global.d.ts"],
   "exclude": ["node_modules", "dist"]
 }

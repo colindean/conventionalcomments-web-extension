@@ -1,4 +1,48 @@
-import { defineConfig, devices } from "@playwright/experimental-ct-react";
+import {
+  expect,
+  defineConfig,
+  devices,
+} from "@playwright/experimental-ct-react";
+import type { Locator } from "@playwright/test";
+
+expect.extend({
+  async toHaveSelectedText(locator: Locator, start: number, end: number) {
+    const result = await locator.evaluate(
+      (
+        node,
+      ):
+        | { success: false }
+        | {
+            success: true;
+            start: number;
+            end: number;
+          } => {
+        if (!(node instanceof HTMLTextAreaElement)) {
+          return { success: false };
+        }
+        return {
+          success: true,
+          start: node.selectionStart,
+          end: node.selectionEnd,
+        };
+      },
+    );
+    if (!result.success) {
+      return {
+        pass: false,
+        message: () => "the selector is not a textarea",
+      };
+    }
+    const pass = start === result.start && end === result.end;
+    return {
+      pass,
+      message: () =>
+        pass
+          ? `expected selection not to be (${start}, ${end})`
+          : `expected selection to be (${start}, ${end}), got (${result.start}, ${result.end})`,
+    };
+  },
+});
 
 /**
  * See https://playwright.dev/docs/test-configuration.
