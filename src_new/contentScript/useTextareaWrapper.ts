@@ -4,13 +4,7 @@ import formatComment from "../helper/formatComment";
 import extractComment from "../helper/extractComment";
 import { DECORATIONS, LABELS } from "./constants";
 
-const EVENTS: (keyof GlobalEventHandlersEventMap)[] = [
-  "select",
-  "click",
-  "focus",
-  "keyup",
-  "keydown",
-];
+const EVENTS = ["select", "click", "focus", "keyup", "keydown"] as const;
 
 function useTextareaWrapper(
   textarea: HTMLTextAreaElement,

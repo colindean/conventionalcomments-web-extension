@@ -1,7 +1,9 @@
 import { useEffect, useRef, useState } from "react";
-import type { Meta } from "@storybook/react";
-import App from "./App";
+import type { Meta, StoryObj } from "@storybook/react";
+import { userEvent, within, expect } from "@storybook/test";
 import invariant from "tiny-invariant";
+
+import App from "./App";
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
 const meta = {
@@ -28,7 +30,6 @@ type State =
 const Template = () => {
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const buttonTargetRef = useRef<HTMLDivElement>(null);
-  console.log(textareaRef.current);
   const [isMounted, setIsMounted] = useState(false);
   useEffect(() => {
     setIsMounted(true);
@@ -56,10 +57,30 @@ const Template = () => {
           buttonParams={{ target: state.buttonTarget }}
         />
       ) : null}
-      <textarea ref={textareaRef} />
+      <textarea data-testid="textarea" ref={textareaRef} />
     </>
   );
 };
 
 export default meta;
 export const Default = Template.bind({});
+
+type Story = StoryObj<typeof Template>;
+
+export const TexteareaHasFocus: Story = {
+  play: async ({ mount }) => {
+    const canvas = await mount(<Template />);
+    const textarea = canvas.getByTestId("textarea");
+    expect(textarea).toHaveFocus();
+  },
+  argTypes: { control: { disable: true } },
+};
+
+export const TexteareaIsInitializedWithCorrectValue: Story = {
+  play: async ({ mount }) => {
+    const canvas = await mount(<Template />);
+    const textarea = canvas.getByTestId("textarea");
+    expect(textarea).toHaveValue("**praise:** ");
+  },
+  argTypes: { params: { control: { disable: true } } },
+};

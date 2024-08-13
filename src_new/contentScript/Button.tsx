@@ -75,7 +75,12 @@ function Button({ productType, isActive, onToggle }: ButtonProps) {
   const buttonClasses = getButtonClasses(productType);
   const iconClasses = getIconClasses(productType);
   return (
-    <span className={buttonClasses.join(" ")} onClick={() => onToggle()}>
+    <span
+      data-testid="button"
+      data-teststatus={isActive ? "active" : "inactive"}
+      className={buttonClasses.join(" ")}
+      onClick={() => onToggle()}
+    >
       <svg
         className={iconClasses.join(" ")}
         width="16"

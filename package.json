@@ -15,7 +15,8 @@
     "2fa-code": "node devScripts/getTwoFactorAuthenticationCode.mjs",
     "update-screenshots": "node devScripts/getScreenshotsFromCI.mjs",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "build-storybook": "storybook build",
+    "test-ct": "playwright test -c playwright-ct.config.ts"
   },
   "dependencies": {
     "escape-string-regexp": "5.0.0",
@@ -25,8 +26,9 @@
   },
   "devDependencies": {
     "@chromatic-com/storybook": "1.6.1",
-    "@eslint/compat": "1.1.0",
-    "@eslint/js": "9.5.0",
+    "@eslint/js": "9.8.0",
+    "@playwright/experimental-ct-react": "1.46.0",
+    "@playwright/test": "1.46.0",
     "@storybook/addon-essentials": "8.2.2",
     "@storybook/addon-interactions": "8.2.2",
     "@storybook/addon-links": "8.2.2",
@@ -35,24 +37,18 @@
     "@storybook/react": "8.2.2",
     "@storybook/react-vite": "8.2.2",
     "@storybook/test": "8.2.2",
+    "@types/node": "^22.2.0",
     "@types/react": "18.3.3",
     "@types/react-dom": "18.3.0",
-    "eslint": "8.57.0",
-    "eslint-config-prettier": "9.1.0",
-    "eslint-plugin-react": "7.34.3",
-    "eslint-plugin-react-hooks": "4.6.2",
-    "eslint-plugin-storybook": "0.8.0",
+    "eslint": "9.8.0",
+    "eslint-plugin-react": "7.35.0",
+    "eslint-plugin-react-hooks": "5.1.0-rc-9d2da591-20240808",
     "extension": "1.8.0",
     "globals": "15.6.0",
     "prettier": "3.3.2",
     "storybook": "8.2.2",
     "tailwindcss": "3.4.4",
     "typescript": "5.4.5",
-    "typescript-eslint": "7.13.1"
-  },
-  "eslintConfig": {
-    "extends": [
-      "plugin:storybook/recommended"
-    ]
+    "typescript-eslint": "8.0.1"
   }
 }

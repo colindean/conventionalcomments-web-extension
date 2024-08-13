@@ -14,7 +14,11 @@ function Editor({
   onToggleDecoration,
 }: EditorProps) {
   return (
-    <div>
+    <div
+      data-testid="editor"
+      data-testlabel={label}
+      data-testdecorations={decorations.join(", ")}
+    >
       <select value={label} onChange={(e) => onSelectLabel(e.target.value)}>
         {LABELS.map(({ value, label }) => (
           <option key={label} value={label}>

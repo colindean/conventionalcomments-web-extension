@@ -16,7 +16,7 @@ const platform = await select({
   ],
 });
 
-// eslint-disable-next-line no-console
+ 
 console.log(
   authenticator.generate(config.get(`e2e.${platform}.twoFactorSecret`)),
 );

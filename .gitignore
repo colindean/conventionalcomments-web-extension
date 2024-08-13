@@ -27,3 +27,7 @@ report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
 /dist
 
 *storybook.log
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/

@@ -1,5 +1,5 @@
 import config from "config";
-import { Octokit } from "octokit"; // eslint-disable-line
+import { Octokit } from "octokit";  
 import { RequestError } from "@octokit/request-error";
 
 const globalSetup = async () => {
