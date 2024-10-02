@@ -1,8 +1,6 @@
 import { useEffect, useRef } from "react";
 import detectModification from "../helper/detectModification";
 import formatComment from "../helper/formatComment";
-import extractComment from "../helper/extractComment";
-import { DECORATIONS, LABELS } from "./constants";
 
 const EVENTS = ["select", "click", "focus", "keyup", "keydown"] as const;
 

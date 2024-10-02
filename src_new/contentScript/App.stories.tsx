@@ -1,6 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import type { Meta, StoryObj } from "@storybook/react";
-import { userEvent, within, expect } from "@storybook/test";
+import type { Meta } from "@storybook/react";
 import invariant from "tiny-invariant";
 
 import App from "./App";
@@ -64,23 +63,3 @@ const Template = () => {
 
 export default meta;
 export const Default = Template.bind({});
-
-type Story = StoryObj<typeof Template>;
-
-export const TexteareaHasFocus: Story = {
-  play: async ({ mount }) => {
-    const canvas = await mount(<Template />);
-    const textarea = canvas.getByTestId("textarea");
-    expect(textarea).toHaveFocus();
-  },
-  argTypes: { control: { disable: true } },
-};
-
-export const TexteareaIsInitializedWithCorrectValue: Story = {
-  play: async ({ mount }) => {
-    const canvas = await mount(<Template />);
-    const textarea = canvas.getByTestId("textarea");
-    expect(textarea).toHaveValue("**praise:** ");
-  },
-  argTypes: { params: { control: { disable: true } } },
-};

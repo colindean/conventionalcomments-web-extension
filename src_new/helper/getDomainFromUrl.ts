@@ -2,7 +2,7 @@ function getDomainFromUrl(url: string): string | null {
   let rawUrl: URL;
   try {
     rawUrl = new URL(url);
-  } catch (err) {
+  } catch {
     return null;
   }
 

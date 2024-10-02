@@ -111,7 +111,7 @@ async function unregisterUrl({
   await chrome.scripting.unregisterContentScripts({ ids: [id] });
   try {
     await chrome.permissions.remove({ origins: [url] });
-  } catch (error) {
+  } catch {
     await addDeactivatedUrl(url);
   }
   registeredUrls.delete(url);

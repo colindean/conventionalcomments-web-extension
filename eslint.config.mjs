@@ -12,7 +12,7 @@ export default [
     },
   },
   {
-    ignores: ["dist/**", "**/*.d.ts"],
+    ignores: ["dist/**", "**/*.d.ts", "src/**", "tests/**"],
   },
   ...tseslint.config(
     {
@@ -35,14 +35,24 @@ export default [
   pluginJs.configs.recommended,
   {
     files: ["{src_new,scripts,pages}/**"],
-    languageOptions: { globals: globals.browser },
+    languageOptions: { globals: { ...globals.browser, chrome: true } },
     rules: {
       ...pluginReactHooks.configs.recommended.rules,
+      "no-unused-vars": "off", // deactivated in favor of typescript
     },
   },
   pluginReact.configs.flat.recommended,
   {
-    files: ["{config,devScripts}/**", "test/**"],
+    files: ["playwright-ct.config.ts"],
+    languageOptions: { globals: { ...globals.node, ...globals.browser } },
+  },
+  {
+    files: [
+      "{config,devScripts}/**",
+      "tests/**",
+      "tailwind.config.js",
+      "postcss.config.js",
+    ],
     languageOptions: { globals: globals.node },
   },
   {

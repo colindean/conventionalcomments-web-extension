@@ -10,5 +10,5 @@ export type CommentEditorExtractor = (
     buttonParams: { target: Element; anchor?: Element };
     productType: ProductType;
   }) => void,
-  onTextareaDisposed: (id: string) => void
+  onTextareaDisposed: (id: string) => void,
 ) => () => void;
